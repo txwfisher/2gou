@@ -5,26 +5,25 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useConfigStore } from '@/app/(home)/stores/config-store'
 import { useState } from 'react'
+import { useBlogIndex } from '@/hooks/use-blog-index'
 
 export default function Page() {
   const { siteContent } = useConfigStore()
+  const { items: articles, loading } = useBlogIndex()
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedTag, setSelectedTag] = useState<string>('all')
-  
-  // 直接定义文章数据
-  const articles = []
   
   // 筛选出分类为"软件"的文章
   const softwareArticles = articles.filter(item => item.category === '软件')
   
   // 获取所有标签
-  const allTags = Array.from(new Set(softwareArticles.flatMap(article => article.tags)))
+  const allTags = Array.from(new Set(softwareArticles.flatMap(article => article.tags || [])))
   
   // 根据搜索词和标签筛选文章
   const filteredArticles = softwareArticles.filter(article => {
     const matchesSearch = article.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                         article.summary.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesTag = selectedTag === 'all' || article.tags.includes(selectedTag)
+                         (article.summary && article.summary.toLowerCase().includes(searchTerm.toLowerCase()))
+    const matchesTag = selectedTag === 'all' || (article.tags && article.tags.includes(selectedTag))
     return matchesSearch && matchesTag
   })
   
@@ -32,8 +31,6 @@ export default function Page() {
   console.log('softwareArticles length:', softwareArticles.length)
   console.log('filteredArticles length:', filteredArticles.length)
   console.log('allTags:', allTags)
-
-  const loading = false
 
   // 截断文本函数
   const truncateText = (text, maxLength) => {
