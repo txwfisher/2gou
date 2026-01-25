@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { toast } from 'sonner'
 import { hashFileSHA256 } from '@/lib/file-utils'
 import { loadBlog } from '@/lib/load-blog'
-import type { PublishForm, ImageItem } from '../types'
+import type { PublishForm, ImageItem, DownloadLink } from '../types'
 
 export const formatDateTimeLocal = (date: Date = new Date()): string => {
 	const pad = (n: number) => String(n).padStart(2, '0')
@@ -35,6 +35,10 @@ type WriteStore = {
 	cover: ImageItem | null
 	setCover: (cover: ImageItem | null) => void
 
+	// Download links state
+	addDownloadLink: (link: DownloadLink) => void
+	deleteDownloadLink: (index: number) => void
+
 	// Publish state
 	loading: boolean
 	setLoading: (loading: boolean) => void
@@ -54,7 +58,8 @@ const initialForm: PublishForm = {
 	date: formatDateTimeLocal(),
 	summary: '',
 	hidden: false,
-	category: ''
+	category: '',
+	downloadLinks: []
 }
 
 export const useWriteStore = create<WriteStore>((set, get) => ({
@@ -150,6 +155,35 @@ export const useWriteStore = create<WriteStore>((set, get) => ({
 	cover: null,
 	setCover: cover => set({ cover }),
 
+	// Download links state
+	addDownloadLink: (link: DownloadLink) => {
+		if (!link || !link.url || !link.url.trim()) return
+		set(state => {
+			const currentLinks = state.form.downloadLinks || []
+			if (!currentLinks.some(l => l.url === link.url.trim())) {
+				return {
+					form: {
+						...state.form,
+						downloadLinks: [...currentLinks, { name: link.name.trim(), url: link.url.trim() }]
+					}
+				}
+			}
+			return state
+		})
+	},
+	deleteDownloadLink: index => {
+		set(state => {
+			const currentLinks = state.form.downloadLinks || []
+			const newLinks = currentLinks.filter((_, i) => i !== index)
+			return {
+				form: {
+					...state.form,
+					downloadLinks: newLinks
+				}
+			}
+		})
+	},
+
 	// Publish state
 	loading: false,
 	setLoading: loading => set({ loading }),
@@ -195,7 +229,8 @@ export const useWriteStore = create<WriteStore>((set, get) => ({
 					date: blog.config.date ? formatDateTimeLocal(new Date(blog.config.date)) : formatDateTimeLocal(),
 					summary: blog.config.summary || '',
 					hidden: blog.config.hidden || false,
-					category: blog.config.category || ''
+					category: blog.config.category || '',
+					downloadLinks: blog.config.downloadLinks || []
 				},
 				images,
 				cover,
@@ -203,13 +238,13 @@ export const useWriteStore = create<WriteStore>((set, get) => ({
 			})
 
 			toast.success('博客加载成功')
-		} catch (err: any) {
-			console.error('Failed to load blog:', err)
-			toast.error(err?.message || '加载博客失败')
-			set({ loading: false })
-			throw err
-		}
-	},
+	} catch (err: any) {
+		console.error('Failed to load blog:', err)
+		toast.error(err?.message || '加载博客失败')
+		set({ loading: false })
+		throw err
+	}
+},
 
 	// Reset to create mode
 	reset: () => {
