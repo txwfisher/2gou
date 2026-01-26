@@ -11,7 +11,8 @@ const iconMatches: IconMatch[] = [
 	{ keywords: ['蓝奏', 'lanzou'], iconName: './蓝奏.svg' },
 	{ keywords: ['迅雷', 'xunlei'], iconName: './迅雷.svg' },
 	{ keywords: ['夸克', 'quark'], iconName: './夸克.svg' },
-	{ keywords: ['阿里', 'ali', '阿里云盘'], iconName: './阿里云盘.svg' }
+	{ keywords: ['阿里', 'ali', '阿里云盘'], iconName: './阿里云盘.svg' },
+	{ keywords: ['github'], iconName: './github.svg' }
 ]
 
 export function getDownloadIcon(name: string, url: string) {
