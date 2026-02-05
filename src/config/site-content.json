@@ -75,7 +75,7 @@
 	"currentHatIndex": 3,
 	"hatFlipped": false,
 	"enableChristmas": true,
-	"enablePasswordAccess": true,
+	"enablePasswordAccess": false,
 	"passwordAccessCategories": [
 		"Chara",
 		"Games"
