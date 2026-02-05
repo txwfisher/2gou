@@ -26,22 +26,10 @@ import { HomeDraggableLayer } from '@/app/(home)/home-draggable-layer'
 
 const list = [
 	{
-		icon: WebsiteOutlineSVG,
-		iconActive: WebsiteFilledSVG,
-		label: '宝藏软件',
-		href: '/Soft'
-	},
-	{
-		icon: ProjectsOutlineSVG,
-		iconActive: ProjectsFilledSVG,
-		label: '精品游戏',
-		href: '/Games'
-	},
-	{
-		icon: AboutOutlineSVG,
-		iconActive: AboutFilledSVG,
-		label: '人物卡片',
-		href: '/Chara'
+		icon: ScrollOutlineSVG,
+		iconActive: ScrollFilledSVG,
+		label: '近期文章',
+		href: '/blog'
 	},
 	{
 		icon: ShareOutlineSVG,
@@ -50,10 +38,22 @@ const list = [
 		href: '/Notes'
 	},
 	{
+		icon: ProjectsOutlineSVG,
+		iconActive: ProjectsFilledSVG,
+		label: '关于网站',
+		href: '/about'
+	},
+	{
+		icon: AboutOutlineSVG,
+		iconActive: AboutFilledSVG,
+		label: '推荐分享',
+		href: '/share'
+	},
+	{
 		icon: ScrollOutlineSVG,
 		iconActive: ScrollFilledSVG,
-		label: '文章归档',
-		href: '/blog'
+		label: '优秀博客',
+		href: '/bloggers'
 	}
 
 ]
