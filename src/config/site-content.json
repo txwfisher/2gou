@@ -1,8 +1,8 @@
 {
 	"meta": {
-		"title": "[贰狗日志]",
-		"description": "任贰狗的个人博客，发布一些日常收集来的软件、游戏，还有一些乱七八糟瞎折腾的研究笔记教程之类的。",
-		"username": "Ciao"
+		"title": "摸鱼日记",
+		"description": "一个喜欢写代码也喜欢摸鱼的野生程序员。",
+		"username": "荼丛"
 	},
 	"theme": {
 		"colorBrand": "#35bfab",
@@ -26,6 +26,14 @@
 		{
 			"id": "852eccdeaa21e3b7",
 			"url": "/images/art/852eccdeaa21e3b7.png"
+		},
+		{
+			"id": "45f4a54d2ed824fd",
+			"url": "/images/art/45f4a54d2ed824fd.png"
+		},
+		{
+			"id": "a46372ff45bc5524",
+			"url": "/images/art/a46372ff45bc5524.jpg"
 		}
 	],
 	"currentArtImageId": "852eccdeaa21e3b7",
@@ -39,22 +47,22 @@
 	"socialButtons": [
 		{
 			"id": "github",
-			"type": "github",
-			"value": "https://github.com/RT622",
+			"type": "qq",
+			"value": "/images/social-buttons/bce856308b049ab4.jpg",
 			"label": "Github",
 			"order": 3
 		},
 		{
 			"id": "juejin",
-			"type": "qq",
-			"value": "/images/social-buttons/7f509f0a4c020a31.png",
+			"type": "wechat",
+			"value": "/images/social-buttons/2300bcbda240d249.png",
 			"label": "稀土掘金",
 			"order": 2
 		},
 		{
 			"id": "email",
 			"type": "email",
-			"value": "Twodog@88.com",
+			"value": "txwfisher@gmail.com",
 			"label": "",
 			"order": 1
 		}
